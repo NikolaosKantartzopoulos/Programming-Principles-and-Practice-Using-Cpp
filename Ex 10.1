@@ -1,0 +1,15 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+int add (istream& is)
+{
+	int i{ 0 },q;
+	while (is >> q) i += q;
+	return i;
+}
+
+int main()
+{
+	ifstream is{ "mydata.txt" };
+	cout << add(is) << '\n';
+	keep_window_open();
+}
