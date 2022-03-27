@@ -1,0 +1,68 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+#include <algorithm>
+
+struct Reading {
+	int day;
+	int hour;
+	double temperature;
+};
+
+istream& operator>>(istream& is, Reading& r)
+// read a temperature reading from is into r
+// format: ( 3 4 9.7 )
+// check format, but don’t bother with data validity
+{
+	char ch1;
+	is >> ch1;
+	if (ch1 != '(') { // could it be a Reading?
+		is.unget();
+		is.clear(ios_base::failbit);
+		return is;
+	} 
+	char ch2;
+	int d;	int h;	double t;
+	is >> d >> h >> t >> ch2;
+	if (!is || ch2 != ')') error("bad reading"); // messed-up reading
+	r.day = d;	r.hour = h;	r.temperature = t;
+	return is;
+}
+
+
+int main()
+{
+	ifstream is("raw_temps.txt");
+	if (!is) cout << "No file found";
+
+	//ofstream ofs("raw_temps.txt");
+
+	//for (int i{ 0 }; i <= 30; i++)
+	//{
+	//	ofs << "(" << i << " 0 " << i + 2 << ")";
+	//}
+
+	vector <Reading> v{};
+	while (true)
+	{
+		Reading s;
+		if (!(is >> s)) break;
+		v.push_back(s);
+	}
+	double mean{ 0 }, add{ 0 };
+	for (int i{ 0 }; i <v.size(); i++)
+		{
+			add += v[i].temperature;
+		}
+	mean = add / v.size();
+	cout << "Mean: " << mean << '\n';
+
+	vector<double> temps{};
+	for (int i{ 0 }; i < v.size(); i++)
+	{
+		temps.push_back(v[i].temperature);
+	}
+	int median = temps[temps.size() / 2];
+	cout << "Median: " << median << '\n';
+
+
+	keep_window_open();
+}
