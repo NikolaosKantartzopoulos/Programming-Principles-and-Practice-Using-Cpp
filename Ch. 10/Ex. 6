@@ -1,0 +1,63 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+class Roman_int
+{
+public:
+	Roman_int(string rom)
+		:rom_num(rom), num{} {}
+	int as_int();
+private:
+	string rom_num;
+	int num;
+};
+int Roman_int::as_int()
+{
+	char buffer = 'a';
+	int left{}, temp{};
+	for (char c : rom_num)
+	{
+		switch (c)
+		{
+		case 'I':
+			left += 1;
+			break;
+		case 'V':
+			if (buffer == 'I') left -= 2;
+			left += 5;
+			break;
+		case 'X':
+			if (buffer == 'I') left -= 2;
+			left += 10;
+			break;
+		case 'L':
+			if (buffer == 'X') left -= 20;
+			left += 50;
+			break;
+		case 'C':
+			if (buffer == 'X') left -= 20;
+			left += 100;
+			break;
+		case 'D':
+			if (buffer == 'C') left -= 200;
+			left += 500;
+			break;
+		case 'M':
+			if (buffer == 'C') left -= 200;
+			left += 1000;
+			break;
+		}
+		buffer = c;
+	}
+	return left;
+}
+
+int main()
+{
+	for (string s; cin >> s;)
+	{
+		if (s == "|") break;
+		Roman_int k(s);
+		cout << "Roman: " << s << " = " << k.as_int() << "\n";
+	}
+	keep_window_open();
+}
