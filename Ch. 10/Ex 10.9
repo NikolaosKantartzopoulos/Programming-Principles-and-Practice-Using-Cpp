@@ -1,0 +1,41 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+int main()
+{
+
+	string first_file_name, second_file_name, total;
+	vector <string> v1;
+	cout << "Enter 1st file name: ";
+	cin >> first_file_name;
+	cout << "\nEnter 2nd file name: ";
+	cin >> second_file_name;
+
+	ifstream ifs_one(first_file_name);
+	if (!ifs_one) error("No ifs_one");
+	while (ifs_one)
+	{
+		string temp;
+		ifs_one >> temp;
+		if (!ifs_one || temp =="") break;
+		v1.push_back(temp);
+	}
+
+	ifstream ifs_two(second_file_name);
+	if (!ifs_two) error("No ifs_two");
+	while (ifs_two)
+	{
+		string temp;
+		ifs_two >> temp;
+		if (!ifs_two || temp == "") break;
+		v1.push_back(temp);
+	}
+
+	sort(v1.begin(), v1.end());
+	for (string c : v1) total += c + " ";
+
+	ofstream ofs("newfile.txt");
+	ofs << total;
+	cout << total;
+
+	keep_window_open();
+}
