@@ -1,0 +1,47 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+vector <int> get_ints(ifstream& ifs, vector <int>& v1)
+{
+	while (ifs)
+	{
+		string temp;
+		bool is_int = true;
+		ifs >> temp;
+		if (!ifs || temp == "") break;
+		for (char c : temp)
+		{
+			if (!(c >= 48 && c <= 57)) is_int = false;
+		}
+		int i;
+		if (is_int)
+		{
+			i = stoi(temp);
+			v1.push_back(i);
+		}
+	}
+	return v1;
+}
+
+int main()
+{
+	string first_file_name, second_file_name;
+	vector <int> v1;
+
+	ifstream ifs_one("1.txt");
+	if (!ifs_one) error("No ifs_one");
+
+	v1 = get_ints(ifs_one,v1);
+
+	ifstream ifs_two("2.txt");
+	if (!ifs_two) error("No ifs_two");
+	v1 = get_ints(ifs_two, v1);
+
+	int sum{};
+	for (int i : v1) sum += i;
+
+	ofstream ofs("newfile.txt");
+	ofs << sum;
+	cout << sum << endl;
+
+	keep_window_open();
+}
