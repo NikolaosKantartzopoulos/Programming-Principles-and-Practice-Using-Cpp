@@ -1,0 +1,29 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+struct person
+{
+	string first_name, last_name, tel, email;
+
+	person(string fn, string ln, string tl, string mail)
+		:first_name(fn), last_name(ln), tel(tl), email(mail) {}
+
+};
+ostream& operator<<(ostream& os, person& item)
+{
+	return os << setw(12) << item.first_name << setw(12) << item.last_name
+		<< setw(15) << item.tel << setw(15) << item.email << endl;
+}
+
+int main()
+{
+
+	person p1("nik", "kan", "069111111", "asd@mail");
+	person p2("name2", "lastname2", "069722222", "sdf@mail");
+	person p3("name3", "lastname3", "069363332", "aaf@mail");
+	person p4("name4", "lastname4", "068955222", "dff@mail");
+
+	vector <person> a {p1, p2, p3, p4};
+	for (person p : a) cout << p;
+
+	keep_window_open();
+}
