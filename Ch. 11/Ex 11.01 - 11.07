@@ -1,0 +1,13 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+int main()
+{
+	int birth_year{ 1989 };
+	cout << showbase << "Decimal: " << birth_year 
+					 << "\tHexal: " << hex << birth_year 
+					 << "\tOctal: " << oct << birth_year << endl;
+	int age{ 33 };
+	cout << "\nAge: " << dec << age << endl;
+
+	keep_window_open();
+}
