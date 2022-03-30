@@ -1,0 +1,35 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+int main()
+{
+	ifstream ifs("1.txt");
+	if (!ifs) error ("No ifs");
+	ofstream ofs("new_file.txt");
+
+
+	cout << "Selected_word: ";
+	string selected_word{};
+	cin >> selected_word;
+	int cnt{ 0 };
+
+	while (ifs)
+	{
+		cnt++;
+		string line;
+		getline(ifs, line);
+		bool has_word{ false };
+		stringstream ss{ line };
+
+		while (ss)
+		{
+			string buffer;
+			ss >> buffer;
+			if (buffer == selected_word)
+			{
+
+				cout << cnt << " " << line << endl;
+			}
+		}
+	}
+	keep_window_open();
+}
