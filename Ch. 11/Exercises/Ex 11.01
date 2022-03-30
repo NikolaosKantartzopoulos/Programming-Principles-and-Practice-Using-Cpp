@@ -1,0 +1,37 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+int main()
+{
+	ifstream ifs("1.txt");
+	ofstream ofs("new_file.txt");
+
+	stringstream ss;
+	while (ifs)
+	{
+		if (!ifs)break;
+		std::string word;
+		string buffer{};
+		ifs >> buffer;
+		if (buffer!= "" && !(buffer.back() == '.' || buffer.back() == '!' || buffer.back() == '?' || buffer.back() == ';'))
+		{
+			word += buffer + " ";
+		}
+		else word += buffer;
+		ss << word;
+	}
+	string ready;
+	while (ss)
+	{
+		if (!ss) break;
+		string buffer{};
+		ss >> buffer;
+		if (buffer != "" && !(buffer.back() == '.' || buffer.back() == '!' || buffer.back() == '?' || buffer.back() == ';'))
+		{
+			ready += buffer + " ";
+		}
+		else ready += buffer;
+	}
+	ofs << ready;
+
+	keep_window_open();
+}
