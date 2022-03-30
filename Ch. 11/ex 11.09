@@ -1,0 +1,11 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+int main()
+{
+	double i = 1234567.89;
+	cout << "Default float: " << defaultfloat   << i
+		 << "\tFixed: "		  << fixed			<< i
+		 << "\tScientific: "  << scientific		<< i << endl;
+
+	keep_window_open();
+}
