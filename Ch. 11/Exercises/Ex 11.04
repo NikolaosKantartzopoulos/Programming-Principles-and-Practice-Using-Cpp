@@ -1,0 +1,46 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+void to_dec(string s)
+{
+	if (!(s[0] == '0')) //is an int
+	{
+		cout << s << "\tdecimal\tconverts to\t" << dec << stoi(s) << "\tdecimal";
+	}
+	else
+	{
+		s.erase(0,1);	
+		if (s[0] != 'x' )  //is oct
+		{
+			cout << '0' << s << "\toctal\tconverts to\t" << oct << stoi(s) << "\toctal";
+		}
+		else if (s[0] == 'x') //is hex
+		{
+			s.erase(0,1);	
+			cout <<"0x" << s << "\thexadecimal\tconverts to\t" << hex << stoi(s) << "\thexadecimal";
+		}
+	}
+	cout << endl;
+}
+
+int main()
+{
+	try
+	{
+		cout << "Enter numbers to convert in decimal. \nUse 0x prefix for hex \nUse 0 prefix for octal\n\n";
+		string read;
+		while (read != "|")
+		{
+			cin >> read;
+			to_dec(read);
+		}
+		keep_window_open();
+	}
+	catch (out_of_range) {
+		cerr << "Oops! Range error\n";
+		return 1;
+	}
+	catch (...) { // catch all other exceptions
+		cerr << "Exception: something went wrong\n";
+		return 2;
+	}
+}
