@@ -1,0 +1,41 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+#include <algorithm>
+
+int main()
+{
+	try
+	{
+		ifstream ifs{ "1.txt" };
+		vector <string> dictionary;
+
+		while (ifs)
+		{
+			string word;
+			ifs >> word;
+			if (word == "don't") word = "do not";
+			if (word == "can't") word = "cannot";
+			for (char& c : word)
+			{
+				if (isalpha(c) && isupper(c)) c = tolower(c);
+
+				if(c == '.' || c == ',' || c == ';' || 
+				   c == '?' || c == '-' || c == '\'' || c == '\"')  c = ' ';
+			}
+			if (word != "") dictionary.push_back(word);
+		}
+		sort(dictionary.begin(), dictionary.end());
+		for (int i{}; i < dictionary.size(); i++)
+		{
+			if (i == 0 || dictionary[i - 1] != dictionary[i])
+				cout << dictionary[i] << '\n';
+		}
+	}
+	catch (out_of_range) {
+		cerr << "Oops! Range error\n";
+		return 1;
+	}
+	catch (...) { // catch all other exceptions
+		cerr << "Exception: something went wrong\n";
+		return 2;
+	}
+}
