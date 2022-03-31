@@ -1,0 +1,42 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+
+int main()
+{
+	try
+	{
+		ifstream ifs{ "1.txt" };
+		int is_sp{}, is_alph{}, is_dig{}, is_upp{}, is_low{}, 
+			is_alnum{}, is_cntrl{}, is_punct{}, is_print{}, is_graph{};
+
+		while (ifs)
+		{
+			bool do_not_change{ false };
+			string word;
+			ifs >> word;
+			for (char& c : word)
+			{
+				if (c == '\"')
+				{
+					if (do_not_change == false)
+						do_not_change = true;
+					else do_not_change = false;
+				}
+
+				if (do_not_change == false)
+					if(c == '.' || c == ',' || c == ';' || 
+					   c == '?' || c == '-' || c == '\'')  c = ' ';
+			}
+			cout << word + " ";
+		}
+
+	}
+	catch (out_of_range) {
+		cerr << "Oops! Range error\n";
+		return 1;
+	}
+	catch (...) { // catch all other exceptions
+		cerr << "Exception: something went wrong\n";
+		return 2;
+	}
+}
