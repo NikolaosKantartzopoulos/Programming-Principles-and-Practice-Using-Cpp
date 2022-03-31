@@ -1,0 +1,25 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+void txt_to_binary(vector<char>& v)
+{
+	ifstream ifs{ "1.txt", ios_base::binary };
+	for (char c; ifs.read(as_bytes(c), sizeof(char));)
+		v.push_back(c);
+}
+
+void binary_to_txt(vector<char>& v)
+{
+	ofstream ofs{ "2.txt",ios_base::binary };
+		for (char c : v) 
+			ofs.write(as_bytes(c), sizeof(char));
+}
+
+int main()
+{
+	vector <char> v;
+	txt_to_binary(v);
+	binary_to_txt(v);
+
+	keep_window_open();
+	return 0;
+}
