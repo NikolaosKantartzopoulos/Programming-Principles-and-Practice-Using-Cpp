@@ -1,0 +1,50 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+
+int main()
+{
+	try
+	{
+		ifstream ifs{ "1.txt" };
+		int is_sp{}, is_alph{}, is_dig{}, is_upp{}, is_low{}, is_alnum{}, is_cntrl{}, is_punct{}, is_print{}, is_graph{};
+
+		while (ifs)
+		{
+			string word;
+			ifs >> word;
+			for (char c : word)
+			{
+				if (isspace(c)) is_sp++;
+				if (isalpha(c)) is_alph++;
+				if (isdigit(c)) is_dig++;
+				if (isupper(c)) is_upp++;
+				if (islower(c)) is_low++;
+				if (isalnum(c)) is_alnum++;
+				if (iscntrl(c)) is_cntrl++;
+				if (ispunct(c)) is_punct++;
+				if (isprint(c)) is_print++;
+				if (isgraph(c)) is_graph++;
+			}
+		}
+
+		cout << "Whitespace:          " << is_sp;
+		cout << "\nAlpha:             " << is_alph;
+		cout << "\nDigit:             " << is_dig;
+		cout << "\nUpper:             " << is_upp;
+		cout << "\nLower:             " << is_low;
+		cout << "\nLetter or digit:   " << is_alnum;
+		cout << "\nCntrl char:        " << is_cntrl;
+		cout << "\nPunctuation:       " << is_punct;
+		cout << "\nPrintable:         " << is_print;
+		cout << "\nGraph:             " << is_graph;
+
+	}
+	catch (out_of_range) {
+		cerr << "Oops! Range error\n";
+		return 1;
+	}
+	catch (...) { // catch all other exceptions
+		cerr << "Exception: something went wrong\n";
+		return 2;
+	}
+}
