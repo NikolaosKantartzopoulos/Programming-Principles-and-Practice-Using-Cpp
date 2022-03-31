@@ -1,0 +1,17 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+int main()
+{
+	ifstream ifs{ "1.txt",ios_base::binary };
+	vector <char> v;
+	ofstream ofs{ "new_file.txt", ios_base::binary };
+	for (char x; ifs.read(as_bytes(x), sizeof(char));)
+		v.push_back(x);
+
+	for (int i = v.size() - 1; i >= 1; i--)
+	{
+		ofs.write(as_bytes(v[i]), sizeof(char));
+	}
+	keep_window_open();
+	return 0;
+}
