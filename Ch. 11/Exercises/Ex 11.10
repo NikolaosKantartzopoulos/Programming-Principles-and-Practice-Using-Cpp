@@ -1,0 +1,23 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+vector<string> split(const string& s)
+{
+	vector <string> v{};
+	stringstream ss{ s };
+	string word;
+	while (ss>>word)
+	{
+		v.push_back(word);
+	}
+	return v;
+}
+
+int main()
+{
+	string s{};
+	getline(cin, s);
+	vector <string> v = split(s);
+	
+	keep_window_open();
+	return 0;
+}
