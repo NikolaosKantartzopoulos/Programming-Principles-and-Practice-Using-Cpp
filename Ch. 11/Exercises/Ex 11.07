@@ -16,7 +16,7 @@ int main()
 			if (word == "can't") word = "cannot";
 			for (char& c : word)
 			{
-				if (isalpha(c) && isupper(c)) tolower(c);
+				if (isalpha(c) && isupper(c)) c = tolower(c);
 
 				if(c == '.' || c == ',' || c == ';' || 
 				   c == '?' || c == '-' || c == '\'')  c = ' ';
