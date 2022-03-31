@@ -1,0 +1,21 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+int main()
+{
+	ifstream ifs{ "1.txt"};
+	ofstream ofs{ "new_file.txt"};
+	string word{};
+	vector<string>v;
+	while (ifs>>word)
+	{
+		v.push_back(word);
+	}
+	
+	for (int i = v.size() - 1; i >= 1; i--)
+	{
+		ofs << v[i] + " ";
+	}
+
+	keep_window_open();
+	return 0;
+}
