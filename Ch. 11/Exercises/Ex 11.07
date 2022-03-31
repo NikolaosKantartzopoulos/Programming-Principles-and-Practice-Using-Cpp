@@ -6,8 +6,6 @@ int main()
 	try
 	{
 		ifstream ifs{ "1.txt" };
-		int is_sp{}, is_alph{}, is_dig{}, is_upp{}, is_low{}, 
-			is_alnum{}, is_cntrl{}, is_punct{}, is_print{}, is_graph{};
 
 		while (ifs)
 		{
