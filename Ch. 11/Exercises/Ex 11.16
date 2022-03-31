@@ -1,0 +1,27 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+int main()
+{
+	ifstream ifs{ "1.txt"};
+	ofstream ofs{ "new_file.txt"};
+	int i{};
+	vector<int>v;
+	while (ifs>>i)
+	{
+		v.push_back(i);
+	}
+	sort(v.begin(), v.end());
+	int cnt{1};
+	for (int i{}; i < v.size()-1; i++)
+	{
+		if (v[i] != v[i + 1])
+		{
+			cout << v[i] << "  " << cnt << '\n';
+			cnt = 1;
+		}
+		else cnt++;
+	}
+
+	keep_window_open();
+	return 0;
+}
