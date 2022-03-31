@@ -1,0 +1,22 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+int main()
+{
+	ifstream ifs{ "1.txt"};
+	ofstream ofs{ "new_file.txt"};
+	double i{};
+	vector<double>v;
+	while (ifs>>i)
+	{
+		v.push_back(i);
+	}
+	cout << scientific << setprecision(8);
+	for (int i{}; i < v.size(); i++)
+	{
+		if ((i+1)%4  == 0 ) cout << setw(20) << v[i] << endl;
+		else cout <<  setw(20) << v[i];
+	}
+
+	keep_window_open();
+	return 0;
+}
