@@ -1,0 +1,66 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+class B1
+{
+public:
+	virtual void vf()
+	{
+		cout << "B1::vf()\n";
+	}
+	void f()
+	{
+		cout << "B1::f()\n";
+	}
+	virtual void pvf() = 0
+	{
+		cout << "B1::pvf()\n\n";
+	}
+};
+
+class D1 : public B1
+{
+public:
+	void vf()
+	{
+		cout << "D1::vf()\n";
+	}
+	void pvf()
+	{
+		cout << "D1::pvf()\n\n";
+	}
+};
+
+class D2 : public D1
+{
+public:
+	void pvf()
+	{
+		cout << "D2::pvf()\n\n";
+	}
+};
+
+
+int main()
+{
+	//B1 b1;
+	//b1.vf();
+	//b1.f();
+
+	D1 d1;
+	d1.f();
+	d1.vf();
+	d1.pvf();
+
+	B1& b1Ref = d1;
+	b1Ref.f();
+	b1Ref.vf();
+	b1Ref.pvf();
+
+	D2 d2;
+	d2.f();
+	d2.vf();
+	d2.pvf();
+
+	keep_window_open();
+	return 0;
+}
