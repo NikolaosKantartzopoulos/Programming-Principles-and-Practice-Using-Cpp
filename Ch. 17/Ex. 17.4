@@ -1,34 +1,34 @@
 //Write a function, char* strdup(const char*), that copies a C-style string into memory it allocates on the free store. Do
 //not use any standard library functions.
+#include <iostream>
 
 int str_length (char* p)
 {
-    int cnt {1};    //to include the '/n' char at the end of the string
+    int cnt {1};    //to include the '\n' char at the end of the string
     while(true)
-        if (s[i] == '/0') return cnt;
+        if (p[cnt] == '\0') return cnt;
         else cnt++;
 }
 
-char* strdup(const char* p)
+char* strdup(char* p)
 {
-  char* s = new char [];
-  while(true)
-  {
+  char* s = new char [str_length(p)];
     for (int i{}; i < str_length(p) ; i++)
     {
-        if (p[i] == '/0') 
+        if (p[i] == '\0') 
         {
             s[i] = p[i];
             return s;
         }
         else s[i] = p[i];      
     }
+    return s;
 }
 
 int main()
 {
     char s[] {"Hello, there!"};
     char* t_print = strdup(s);
-    for (int i{0}; i < 13< i++) std::cout << t_print[i];
+    for (int i{0}; i < str_length(s) ; i++) std::cout << t_print[i];
     return 0;
 }
