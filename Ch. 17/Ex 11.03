@@ -1,0 +1,40 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+void to_lower(char* s)
+{
+	int i{ 0 };
+	while(true)
+	{
+		if (s[i] == '\0') return;
+		else if (isupper(s[i]))
+		{
+			s[i] = tolower(s[i]);
+		}
+		i++;
+	}
+}
+void print_c_style_string(char* s)
+{
+	int i{ 0 };
+	while (true)
+	{
+		if (s[i] == '\0') return;
+		else cout << s[i];
+		i++;
+	}
+}
+
+int main()
+{
+	char c[]{ "Hello, World!" };
+	print_c_style_string(c);
+
+	cout << endl;
+	to_lower(c);
+	print_c_style_string(c);
+	cout << endl;
+
+
+	keep_window_open();
+	return 0;
+}
