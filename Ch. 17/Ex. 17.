@@ -1,0 +1,22 @@
+//Write a function, char* strdup(const char*), that copies a C-style string into memory it allocates on the free store. Do
+//not use any standard library functions.
+
+int str_length (char* p)
+{
+    int cnt {1};    //to include the '/n' char at the end of the string
+    while(true)
+        if (s[i] == '/0') return cnt;
+        else cnt++;
+}
+
+char* strdup(const char* p)
+{
+  char* s = new char [];
+  while(true)
+  {
+    if (s[i] == '/0') return s
+    
+
+
+
+}
