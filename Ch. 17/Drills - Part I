@@ -1,0 +1,53 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+void print_array10(ostream& os, int* a)
+{
+	os << endl;
+	for (int i{}; i < 10; i++)
+	{
+		os << a[i] << "  ";
+	}
+	os << endl;
+}
+void print_array(ostream& os, int* a, int n)
+{
+	os << endl;
+	for (int i{}; i < n; i++)
+	{
+		os << a[i] << "  ";
+	}
+	os << endl;
+}
+
+
+int main()
+{
+	int* p = new int []{1,2,3,4,5,6,7,8,9,10};
+	for(int i{}; i < 10; i++)
+	{
+		cout << p[i] << "  ";
+	}
+	print_array10(cout, p);
+	delete []p;
+
+	int* a = new int [] {101, 102, 103, 104, 105, 106, 107, 108, 109, 110};
+	print_array10(cout, a);
+	delete[]a;
+
+	int* b = new int [] {101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111};
+	for (int i{}; i < 11; i++)
+	{
+		cout << b[i] << "  ";
+	}
+	delete[]b;
+	cout << endl;
+
+	int* t = new int [] {101, 102, 103, 104, 105, 106, 107, 108, 109, 110,
+						 111, 112, 113, 114, 115, 116, 117, 118, 119, 120};
+	print_array(cout, t, 20);
+	delete[]t;
+	
+
+	keep_window_open();
+	return 0;
+}
