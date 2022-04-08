@@ -1,0 +1,47 @@
+//Write a program that reads characters from cin into an array that you allocate on the free store. Read individual
+//characters until an exclamation mark (!) is entered. Do not use a std::string. Do not worry about memory exhaustion.
+
+#include <iostream>
+
+int str_length (char* p)
+{
+    int cnt {1};    //to include the '\n' char at the end of the string
+    while(true)
+        if (p[cnt] == '\0') return cnt;
+        else cnt++;
+}
+
+char* strdup(char* p)
+{
+  char* s = new char [str_length(p)];
+    for (int i{}; i < str_length(p) ; i++)
+    {
+        if (p[i] == '\0') 
+        {
+            s[i] = p[i];
+            return s;
+        }
+        else s[i] = p[i];      
+    }
+    return s;
+}
+
+char* add_to_c_str (char* input)
+{
+    char a = '';
+    while (a != '!')
+    {
+        std::cin >> a;
+        char* c = new char [str_length(input) + 1];
+        c = strdup(input);
+        c[str_length(input)] = a; 
+        c[str_length(input) +1 ] = '\0'; 
+    }
+    return c;
+}
+
+int main()
+{
+    char* s = 
+
+}
