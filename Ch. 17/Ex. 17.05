@@ -1,0 +1,26 @@
+//Write a function, char* findx(const char* s, const char* x), 
+//that finds the first occurrence of the C-style string x in s.
+
+#include <iostream>
+
+int str_length (char* p)
+{
+    int cnt {1};    //to include the '\n' char at the end of the string
+    while(true)
+        if (p[cnt] == '\0') return cnt;
+        else cnt++;
+}
+
+char* findx(char* s, char* x)
+{
+    for (int i{}; i < str_length(s); i++)
+        if (s[i] == x[0]) return &s[i];
+    return &s[0];
+}
+
+int main() 
+{
+    char s[] {"Hello, there!"};
+    char* x = findx(s,&s[4]);
+    std::cout << x[0];
+}
