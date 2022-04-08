@@ -1,0 +1,18 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+//Includes Part II from 1. to 5.
+
+int main()
+{
+	int p1{ 7 };
+	cout << "Value of p1:\t" << p1 << "\nAddress of p1:\t" << &p1 << endl;
+	int p2[]{ 1,2,3,4,5,6,7,8 };
+	cout << "Value of p2:\t" << *p2 << "\nAddress of p1:\t" << &p2 << endl;
+	int* p3 = p2;
+	cout << "Value of p3:\t" << p3 << "\nAddress of p3:\t" << &p3 << endl;
+
+	delete[] p2;
+
+	keep_window_open();
+	return 0;
+}
