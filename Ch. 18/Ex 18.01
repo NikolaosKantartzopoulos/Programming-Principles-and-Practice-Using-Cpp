@@ -1,0 +1,30 @@
+/*Write a function, char* strdup(const char*), that copies a C-style string into 
+memory it allocates on the free store. Donot use any standard library functions. 
+Do not use subscripting; use the dereference operator * instead.*/
+
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+char* strdup(char* p)
+{
+	int cnt{ 1 };	//cout until \n
+	while (*p != '\0') { cout << *p; p++; cnt++; }
+	p -= cnt - 1;	//reset position of p
+	char* a = new char[cnt];
+	cout << endl;
+	for (int i{ 0 }; i < cnt; i++)
+	{
+		*a = *p;	//copy each bit
+		a++; p++;
+	}
+	a -= cnt + 1;  //reset position of a
+	return a;
+}
+
+int main()
+{
+	char* ch = new char [] {"Hello, there!"};
+	char* s = strdup(ch);
+	while (*s != '\0') { s++; cout << *s; }
+	cout << endl;
+	keep_window_open();
+}
