@@ -26,5 +26,8 @@ int main()
 	char* s = strdup(ch);
 	while (*s != '\0') { s++; cout << *s; }
 	cout << endl;
+	delete[] ch;
+	delete[] s;
 	keep_window_open();
+
 }
