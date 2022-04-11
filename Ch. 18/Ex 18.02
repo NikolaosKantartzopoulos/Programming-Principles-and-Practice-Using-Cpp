@@ -1,0 +1,59 @@
+/*  Write a function, char* findx(const char* s, const char* x), that finds the 
+	first occurrence of the C-style string x ins. Do not use any standard library functions. 
+	Do not use subscripting; use the dereference operator * instead.    */
+
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+char* findx(char* to_search, char* to_find)
+{
+	int cnt_to_search{ 1 }, cnt_of_to_find {1};	//count until \n, to get the to_search str length
+	while (*to_search != '\0') { cout << *to_search; to_search++; cnt_to_search++; }
+	to_search -= cnt_to_search - 1;	//reset position of to_search
+	bool reading_same_bits = false;
+	int cnt_loop_search{1}, cnt_loop_find{1};
+	for (int i{ 0 }; i < cnt_to_search; i++) //start iterating through the to_search string
+	{
+		if (reading_same_bits && (*to_search != *to_find)) break;	
+			//if while traversing same characters, you find sth different break
+		if (*to_search == *to_find)	//if bits are the same 
+		{
+			reading_same_bits = true;
+			while (reading_same_bits)
+			{
+				if (reading_same_bits && (*to_search != *to_find)) break;
+				for (int j{}; j < cnt_of_to_find; j++)
+				{
+					cnt_loop_find++;
+					cnt_loop_search++;
+				}
+				to_search++; to_find++;
+			}
+		}
+		cnt_loop_search++;
+		to_search++;
+	}
+	to_search -= cnt_loop_find ;
+	to_find -= cnt_loop_find -1;
+
+	cout << "\n\nto search "; for (int i{}; i < 3; i++) cout << to_search[i];
+	cout << "\n\nto find "; for (int i{}; i < 3; i++) cout << to_find[i];
+	return to_search;
+
+}
+
+int main()
+{
+	char* greeting = new char [] {"Hello, there. General Kenobi!"};
+	char* to_find = new char [] {"General"};
+	char* found = new char[strlen(to_find)]; 
+	found = findx(greeting, to_find);
+
+	cout << "\n\nfound "; for (int i{}; i < 6; i++) cout << found[i];
+	delete[] greeting;
+	delete[] to_find;
+	delete[] found;
+
+	cout << endl;
+	keep_window_open();
+
+}
