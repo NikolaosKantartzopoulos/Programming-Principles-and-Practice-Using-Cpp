@@ -1,0 +1,66 @@
+/*  Write a function, int strcmp(const char* s1, const char* s2), that compares 
+	C-style strings. Let it return a negativenumber if s1 is lexicographically before 
+	s2, zero if s1 equals s2, and a positive number if s1 is lexicographically after s2. 
+	Do not use any standard library functions. Do not use subscripting; use the 
+	dereference operator * instead.    */
+
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+char* strcmp(char* str_1, char* str_2)
+{
+	int cnt_str_1{ 1 }, cnt_str_2{ 1 };
+	while (*str_1 != '\0') { str_1++; cnt_str_1++; } //get str_1 length
+	str_1 -= cnt_str_1 - 1;
+	while (*str_2 != '\0') { str_2++; cnt_str_2++; }	//get str_2 length
+	str_2 -= cnt_str_2 - 1;
+
+	char* to_return = new char[cnt_str_1 + cnt_str_2 - 1];
+	int cnt_loop_to_ret{}, cnt_loop_str_1{}, cnt_loop_str_2{};
+
+	for (int i{ 0 }; i < cnt_str_1-1; i++)
+	{
+		*to_return = *str_1;
+		to_return++; str_1++;
+		cnt_loop_str_1++;
+	}
+	*to_return = '.';
+	str_1 -= cnt_loop_str_1;
+	to_return++;
+
+	for (int i{ 0 }; i < cnt_str_2 - 1; i++)
+	{
+		*to_return = *str_2;
+		to_return++; str_2++;
+		cnt_loop_str_2++;
+	}
+	str_2 -= cnt_loop_str_2;
+	to_return -= (cnt_loop_str_1 + cnt_loop_str_2 + 1);
+	
+	return to_return;
+}
+
+int main()
+{
+	char* greeting = new char [] {"Niels"};
+	char* answer = new char [] {"Bohr"};
+
+
+	int cnt_str_1{ 1 }, cnt_str_2{ 1 };
+	while (*greeting != '\0') { greeting++; cnt_str_1++; } //get str_1 length
+	greeting -= cnt_str_1 - 1;
+	while (*answer != '\0') { answer++; cnt_str_2++; }	//get str_2 length
+	answer -= cnt_str_2 - 1;
+
+
+	char* new_string = new char[cnt_str_1 + cnt_str_2 - 1];
+	new_string = strcmp(greeting, answer);
+
+	for (int i{}; i < (cnt_str_1 + cnt_str_2 - 1); i++) cout << new_string[i];
+
+	delete[] greeting;
+	delete[] answer;
+	delete[] new_string;
+
+	cout << endl;
+	keep_window_open();
+}
