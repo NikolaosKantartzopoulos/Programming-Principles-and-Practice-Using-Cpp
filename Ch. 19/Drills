@@ -1,0 +1,107 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+template<typename T>struct S
+
+{
+public:
+	explicit S(T t) : val{ t } {};
+	T& get();
+	const T& get() const;
+	S& operator=(const T&);
+
+
+	//void set(T t){val = t;}
+
+private:
+	T val;
+};
+
+template<typename T>T& S<T>::get()
+{
+	return val;
+}
+template<typename T>const T& S<T>::get() const
+{
+	return val;
+}
+template<typename T>ostream& operator<<(ostream& os, vector<T>& v)
+{
+	os << "{ ";
+	for (int i = 0; i < v.size(); ++i) {
+		os << v[i] << (i < v.size() - 1 ? ", " : " ");
+	}
+	os << "}\n";
+
+	return os;
+}
+template<typename T>S<T>& S<T>::operator=(const T& s)
+{
+	val = s;
+	return *this;
+}
+template<typename T> void read_val(T& v)
+{
+	std::cin >> v;
+}
+template<typename T>istream& operator>>(istream& is, vector<T>& v)
+{
+	char ch = 0;
+	is >> ch;
+	if (ch != '{') {
+		is.unget();
+		return is;
+	}
+
+	for (T val; is >> val; ) {
+		v.push_back(val);
+		is >> ch;
+		if (ch != ',') break;
+	}
+
+	return is;
+}
+
+
+int main()
+{
+	S<int> s_int(12);
+	S<char> s_char('a');
+	S<double> s_double(3.14159);
+	S<string> s_string("ASDF");
+	S<vector<int>> s_vector (vector<int>{ 1,2,3 });
+
+	cout << "s_int      \t " << s_int.get();
+	cout << "\ns_char   \t " <<  s_char.get();
+	cout << "\ns_double \t " <<  s_double.get();
+	cout << "\ns_string \t " <<  s_string.get();
+	cout << "\ns_vector \t " <<  s_vector.get() << endl;
+
+	//____________Using set___________________
+	//s_int.set(88);
+	//s_char.set('z');
+	//s_double.set(99.99);
+	//s_string.set("qwer");
+	//s_vector.set({ 4,5,6 });
+	//cout << "\nNew sets...\n";
+	//cout << "s_int      \t " << s_int.get();
+	//cout << "\ns_char   \t " << s_char.get();
+	//cout << "\ns_double \t " << s_double.get();
+	//cout << "\ns_string \t " << s_string.get();
+	//cout << "\ns_vector \t " << s_vector.get() << endl;
+
+	////____________Using operator= ___________________
+	//s_int = 55;
+	//s_char = 'h';
+	//s_double = 55.55;
+	//s_string = "sfgh";
+	//s_vector = { 7,8,9 };
+	//cout << "s_int      \t " << s_int.get();
+	//cout << "\ns_char   \t " << s_char.get();
+	//cout << "\ns_double \t " << s_double.get();
+	//cout << "\ns_string \t " << s_string.get();
+	//cout << "\ns_vector \t " << s_vector.get() << endl;
+
+	cout << endl;
+	keep_window_open();
+
+}
