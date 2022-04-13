@@ -1,0 +1,24 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+template <typename T> vector<T>& f(vector <T>& v1, const vector<T>& v2 )
+{
+	for (int i{ 0 }; i < v1.size(); i++)
+	{
+		v1[i] += v2[i];
+	}
+	return v1;
+}
+
+int main()
+{
+	vector<int> i1{ 0,1,2};
+	vector<int> i2{ 1,2,3,4,5 };
+	vector<string> v1{ "The","A","Just"};
+	vector<string> v2{ "Larry","Moe","Curly"};
+	f(i1, i2);
+	f(v1, v2);
+
+  cout << endl;
+	keep_window_open();
+
+}
