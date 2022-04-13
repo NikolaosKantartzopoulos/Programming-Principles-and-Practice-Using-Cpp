@@ -1,0 +1,24 @@
+#include "D:/Multimedia/My Projects/Visual Studio/std_lib_facilities.h"
+
+template <typename T, typename U> T f(vector <T>& vt,vector<U>& vu )
+{
+	if(vt.size() != vu.size()) return -1;
+	T sum{};
+	for (int i{ 0 }; i < vt.size(); i++)
+	{
+		sum+= vt[i] * vu[i];
+	}
+	return sum;
+}
+
+int main()
+{
+	vector<int> i1{ 0,1,2};
+	vector<int> i2{ 1,2,3};
+	vector<double> d2{ 1.4,2.6,9.9 };
+	cout << f(i1, i2) << endl;
+	cout << f(i1, d2);
+
+	cout << endl;
+	keep_window_open();
+}
