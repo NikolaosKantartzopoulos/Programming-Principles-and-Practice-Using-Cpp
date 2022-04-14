@@ -1,0 +1,52 @@
+#include <iostream>
+
+class Int
+{
+private:
+	int val;
+public:
+	Int(int n) : val{ n } {}
+	~Int() {}
+	int get() const { return val; }
+	Int& operator=(const int new_val) {val = new_val; return *this;}
+};
+
+int operator+(const Int& a, const Int& b)
+{
+	return a.get() + b.get();
+}
+
+int operator-(const Int& a, const Int& b)
+{
+	return a.get() - b.get();
+}
+
+int operator*(const Int& a, const Int& b)
+{
+	return a.get() * b.get();
+}
+
+int operator/(const Int& a, const Int& b)
+{
+	return a.get() / b.get();
+}
+
+std::ostream& operator<<(std::ostream& os, Int item)
+{
+	return os << item.get();
+}
+
+std::istream& operator>>(std::istream& is, Int item)
+{
+	int i{};
+	std::cin >> i;
+	item = i;
+	return is;
+}
+
+int main()
+{
+	Int x{ 2 };
+	Int y = 4;
+	std::cout << x + y;
+}
