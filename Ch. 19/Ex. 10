@@ -1,0 +1,19 @@
+template<typename T> class unique_ptr {
+private:
+    T* p;
+public:
+    explicit unique_ptr(T* ptr) : p{ ptr } {}
+    ~unique_ptr()
+    {
+        delete p;
+    }
+
+    T* release()
+    {
+        T* q = p;
+        p = nullptr;
+        return q;
+    }
+
+    T& operator*() { return *p; }
+};
