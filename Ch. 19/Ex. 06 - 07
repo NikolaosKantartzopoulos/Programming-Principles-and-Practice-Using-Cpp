@@ -1,0 +1,110 @@
+#include <iostream>
+#include <vector>
+
+template<typename T> class Number {
+    T val;
+public:
+    Number(T value = 0) : val{ value } { }
+    T get() const { return val; }
+    T& operator=(const T& value) { val = value; return *this; }
+};
+
+template<typename T>
+std::ostream& operator<<(std::ostream& os, const Number<T>& item)
+{
+    return os << item.get();
+}
+
+template<typename T>
+std::istream& operator>>(std::istream& is, Number<T>& item)
+{
+    T x;
+    is >> x;
+    Number<T> n_val{ x };
+    item = n_val;
+    return is;
+}
+
+template<typename T, typename U>
+Number<T> operator+(const Number<T>& t, const Number<U>& u)
+{
+    return t.get() + u.get();
+}
+
+template<typename T, typename U>
+Number<T> operator-(const Number<T>& t, const Number<U>& u)
+{
+    return t.get() - u.get();
+}
+
+template<typename T, typename U>
+Number<T> operator*(const Number<T>& t, const Number<U>& u)
+{
+    return t.get() * u.get();
+}
+
+template<typename T, typename U>
+Number<T> operator/(const Number<T>& t, const Number<U>& u)
+{
+    return t.get() / u.get();
+}
+
+template<typename T, typename U>
+Number<T> operator%(const Number<T>& t, const Number<U>& u)
+{
+    return int(t.get()) % int(u.get());
+}
+
+template<typename T, typename U>
+void operator+=(Number<T>& t, const Number<U>& u)
+{
+    int x = t.get() + u.get();
+    Number<T> item{ x };
+    t = item;
+}
+
+// Ex. 02
+template<typename T, typename U>
+T product_sum(std::vector<T>& vt, std::vector<U>& vu)
+{
+    if (vt.size() != vu.size())
+        return -1;
+
+    T sum{ 0 };
+    for (int i = 0; i < vt.size(); ++i) sum += vt[i] * vu[i];
+
+    return sum;
+}
+
+int main()
+{
+    Number<int> a_num {38};
+    Number<double> pi {3.14159};
+
+    std::cout << "Number<int> : " << a_num << '\n';
+    std::cout << "Number<double> : " << pi << '\n';
+
+    std::cout << "Enter an integer: ";
+    Number<int> my_num;
+    std::cin >> my_num;
+    std::cout << "You entered: " << my_num << '\n';
+
+    std::cout << "Int    +\t: " << a_num + my_num   << '\n';
+    std::cout << "Double +\t: " << pi + my_num      << '\n';
+    std::cout << "Int    -\t: " << a_num - my_num   << '\n';
+    std::cout << "Double -\t: " << pi - my_num      << '\n';
+    std::cout << "Int    *\t: " << a_num * my_num   << '\n';
+    std::cout << "Double *\t: " << pi * my_num      << '\n';
+    std::cout << "Int    /\t: " << a_num / my_num   << '\n';
+    std::cout << "Double /\t: " << pi / my_num      << '\n';
+    std::cout << "Int    %\t: " << a_num % my_num   << '\n';
+    std::cout << "Double %\t: " << pi % my_num      << '\n';
+
+
+    // Ex. 07
+    std::vector<Number<int>> v1{ 1, 2, 3, 4 };
+    std::vector<Number<int>> v2{ 2, 4, 6, 8 };
+
+    Number<int> n = product_sum(v1, v2);
+    std::cout << n << '\n';
+}
