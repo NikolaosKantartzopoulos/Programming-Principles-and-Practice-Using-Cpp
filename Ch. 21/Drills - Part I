@@ -1,0 +1,91 @@
+#include <iostream>
+#include <fstream>
+
+#include <array>
+#include <list>
+#include <map>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+struct Item
+{
+	std::string name;
+	int iid{};
+	double value{};
+	Item() {}
+	Item(std::string s, int id, double val)
+		:name{ s }, iid{ id }, value{ val }{}
+
+};
+std::istream& operator>>(std::istream& is, Item& item)
+{
+	is >> item.name >> item.iid >> item.value;
+	return is;
+}
+std::ostream& operator<<(std::ostream& os, const Item& it)
+{
+	return os << it.name << '\t'
+		<< it.iid << '\t'
+		<< it.value;
+}
+
+struct insert_after_name
+{
+	std::string s;
+	insert_after_name(std::string s_temp)
+		:s{ s_temp } {}
+	bool operator()(const Item& a) { return a.name > s; }
+};
+
+struct cmp_by_name
+{
+	std::string name;
+	cmp_by_name(const std::string& s) : name{ s } { }
+	bool operator()(const Item& a) const { return a.name == name; }
+};
+
+class cmp_by_iid
+{
+	int id;
+public:
+	cmp_by_iid(const int& i) : id{ i } {}
+	bool operator()(const Item& a) const { return a.iid == id;}
+};
+
+int main()
+{
+	//Dr 1
+	std::ifstream ifs { "1.txt" };
+	std::vector <Item> vi;
+	for (Item k; ifs >> k;) vi.push_back(k);
+
+	//Dr 2 - sort by name
+	sort(vi.begin(), vi.end(), [](const Item& item1, const Item& item2) {return item1.name < item2.name; });
+	//Dr 3 - sort by iid
+	sort(vi.begin(), vi.end(), [](const Item& item1, const Item& item2) {return item1.iid < item2.iid; });
+	//Dr 4 - sort by value
+	sort(vi.begin(), vi.end(), [](const Item& item1, const Item& item2) {return item1.value > item2.value; });
+	for (auto i : vi) std::cout << i << '\n';
+	//Dr 5
+	
+	//std::vector<Item>::iterator vec_it = vi.begin();
+	//vi.insert(vec_it + 2, Item("horse shoe", 99, 12.34));
+	//vi.insert(vec_it + 5, Item("Canon S400", 9988, 499.95));
+	
+	//Dr 5 insert to alphabetical order
+	sort(vi.begin(), vi.end(), [](const Item& item1, const Item& item2) {return item1.name < item2.name; }); // reset ab order
+	Item horse_shoe{ "horse shoe", 99, 1.34 };  
+	vi.insert(std::find_if(vi.begin(), vi.end(), insert_after_name(horse_shoe.name)),horse_shoe);
+
+	Item camera{ "canon S400", 9988, 499.95 };
+	vi.insert(std::find_if(vi.begin(), vi.end(), insert_after_name(camera.name)), camera);
+
+	//Dr 6 - delete 2 items by name
+	vi.erase(std::find_if(vi.begin(), vi.end(), cmp_by_name("horse shoe")));
+	vi.erase(std::find_if(vi.begin(), vi.end(), cmp_by_name("canon S400")));
+
+	//Dr 7 - delete 2 items by id
+	vi.erase(std::find_if(vi.begin(), vi.end(), cmp_by_iid(1)));
+	vi.erase(std::find_if(vi.begin(), vi.end(), cmp_by_iid(2)));
+}
