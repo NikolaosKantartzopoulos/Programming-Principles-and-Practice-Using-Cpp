@@ -1,0 +1,60 @@
+#include <iostream>
+#include <fstream>
+
+#include <array>
+#include <list>
+#include <map>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <numeric>
+
+template <typename A> 
+void pr_vector(std::ostream& os, std::vector<A>& v)
+{
+	for (int i{}; i <v.size(); i++)	os << v[i] << '\n';
+}
+
+class less_than
+{
+	double num;
+public:
+	less_than(double n)
+		:num{ n } {}
+	bool operator()(const double a) { return a < num; }
+};
+
+int main()
+{
+	std::vector <double> vd;												//dr1
+	std::ifstream ifs("1.txt");
+	for (double d; ifs >> d;) vd.push_back(d);
+	pr_vector(std::cout, vd);												//dr2
+
+	std::vector<int> vi;													//dr3
+	std::ifstream ifs2("2.txt");
+	for (int i; ifs2 >> i;) vi.push_back(i);
+
+	for (int i{}; i < vd.size(); i++)										//dr4
+		std::cout << vi[i] << '\t' << vd[i] << '\n';
+
+	double sum_d = std::accumulate(vd.begin(), vd.end(), vd[0]);			//dr5
+	std::cout << "\n\nSum of vector of doubles:\t" << sum_d << std::endl;
+	int sum_i = std::accumulate(vi.begin(), vi.end(), vi[0]);
+	double dif = sum_d - sum_i;												//dr6
+	std::cout << "\nSum of doubles - Sum of ints = " << dif << std::endl;
+
+	std::reverse(vd.begin(), vd.end());										//dr7
+	pr_vector(std::cout, vd);
+
+	double mean_val = sum_d / vd.size();									//dr8
+	std::cout << "\nMean value of vd = " << mean_val << std::endl;
+
+	int calc_size{};														//dr9
+	for (auto c : vd) if (c <= mean_val) calc_size++;
+	std::vector<double> vd2(calc_size);
+	auto my_it = std::copy_if(vd.begin(), vd.end(), vd2.begin(), less_than(mean_val));
+
+	std::sort(vd2.begin(), vd2.end());										//dr10
+	pr_vector(std::cout, vd2);
+}
