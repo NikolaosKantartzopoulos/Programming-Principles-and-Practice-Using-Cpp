@@ -1,0 +1,74 @@
+#include <iostream>
+#include <fstream>
+
+#include <array>
+#include <list>
+#include <map>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <numeric>
+
+struct Item
+{
+	std::string name;
+	int age{};
+	Item() {}
+	Item(std::string s,  int val)
+		:name{ s }, age{ val }{}
+
+};
+std::istream& operator>>(std::istream& is, Item& item)
+{
+	is >> item.name >>  item.age;
+	return is;
+}
+std::ostream& operator<<(std::ostream& os, const Item& it)
+{
+	return os << it.name << '\t' << it.age;
+}
+//Dr 5
+void read_pairs(std::map<std::string, int>& thy_map)
+{
+	std::string s_read; int i_read{};
+	std::cout << "Enter pairs seperated by space. Complete when \'|' is pressed.\n\n";
+	while (true)
+	{
+		std::cin >> s_read;
+		if (s_read == "|") break;
+		std::cin >> i_read;
+		thy_map[s_read] = i_read;
+	}
+}
+//Dr 3
+template<typename A, typename B>
+void print_map(const std::map<A, B>& item)
+{
+	for (auto c : item) std::cout << c.first << "\t" << c.second << '\n';
+}
+
+int main()
+{
+	//Dr 1 + 2
+	std::ifstream ifs { "1.txt" };
+	std::map <std::string, int> msi;
+	for (Item k; ifs >> k;) msi[k.name] = k.age;
+	//Dr 3
+	print_map(msi);
+
+	////Dr 4
+	//msi.erase(msi.begin(), msi.end());
+	////Dr 5 - 6
+	//read_pairs(msi);
+	////Dr 7
+	//for (auto c : msi) std::cout << c.first << "\t" << c.second << '\n';
+
+	//Dr 8
+	int sum = std::accumulate(msi.begin(), msi.end(), 0, 
+		[](int sum, const std::pair<std::string, int>& item) {return sum += item.second; });
+	//Dr 9
+	std::map <int, std::string> mis;
+	for (auto c : msi) mis.emplace(c.second, c.first);
+	//Dr 10
+	print_map(mis);
+}
